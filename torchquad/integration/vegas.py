@@ -61,6 +61,7 @@ class VEGAS(BaseIntegrator):
             max_iterations (int, optional): Maximum number of vegas iterations to perform. The number of performed iterations is usually lower than this value because the number of sample points per iteration increases every fifth iteration. Defaults to 20.
             use_warmup (bool, optional): If True, execute a warmup to initialize the vegas map. Defaults to True.
             backend (string, optional): Numerical backend. "jax" and "tensorflow" are unsupported. Defaults to integration_domain's backend if it is a tensor and otherwise to the backend from the latest call to set_up_backend or "torch" for backwards compatibility.
+            vegasmap (VEGASMap, optional): An initialised VEGASMap; this can be used to get a better map if only small changes to the integration function are made, e.g. if optimizing hyperparameters. Defaults to None.
 
         Raises:
             ValueError: If the integration_domain or backend argument is invalid
