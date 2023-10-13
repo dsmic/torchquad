@@ -41,6 +41,7 @@ class VEGAS(BaseIntegrator):
         max_iterations=20,
         use_warmup=True,
         backend=None,
+        vegasmap=None,
     ):
         """Integrates the passed function on the passed domain using VEGAS.
 
@@ -115,7 +116,10 @@ class VEGAS(BaseIntegrator):
         # Note that a larger number of intervals may lead to problems if only few evals are allowed
         # Paper section II B
         N_intervals = max(2, self._N_increment // 10)  # for small N intervals set 2
-        self.map = VEGASMap(N_intervals, self._dim, self.backend, self.dtype)
+        if vegasmap is None:
+            self.map = VEGASMap(N_intervals, self._dim, self.backend, self.dtype)
+        else:
+            self.map = vegasmap
 
         # Initialize VEGAS' stratification
         # Paper section III
